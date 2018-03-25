@@ -1,0 +1,10 @@
+.tab-item-active:after {
+    content: '';
+    display: block;
+    border-bottom: solid 2px;
+    width: 100%;
+    margin: 1px;
+}
+.tab-item {
+	border:none !important;
+}
