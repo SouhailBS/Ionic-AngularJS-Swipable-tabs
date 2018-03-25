@@ -56,7 +56,7 @@ angular.module('ionic')
             
             nextIonNavView.attr("nav-view", "active");
             nextIonNavView.css(style);
-            document.getElementsByTagName('head')[0].append(styleTag);
+            (!document.contains(styleTag)) && document.getElementsByTagName('head')[0].append(styleTag);
           }
           
         };
@@ -71,3 +71,9 @@ angular.module('ionic')
       }
     };
   }]);
+if (typeof Element.prototype.append != 'function') {
+  // see below for better implementation!
+  Element.prototype.append = function (element){
+    this.innerHTML += element.outerHTML;
+  };
+}
