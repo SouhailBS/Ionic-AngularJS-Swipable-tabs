@@ -1,7 +1,7 @@
 # Ionic-AngularJS-Swipable-tabs
 
 
-A free, easy installation Ionic/AngularJS extension to support swipable tabs.
+A free, easy installation Ionic/AngularJS directive to support swipable tabs.
 
 
 ## Screenshot
