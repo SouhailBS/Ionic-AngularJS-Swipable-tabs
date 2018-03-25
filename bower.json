@@ -1,0 +1,20 @@
+{
+  "name": "ionic",
+  "version": "1.0.0",
+  "homepage": "https://github.com/SouhailBS/Ionic-AngularJS-Swipable-tabs",
+  "authors": [
+    "Ben Slimene Souhail <souhailbenslimene@outlook.com>"
+  ],
+  "description": "Ionic-AngularJS Swipable tabs support.",
+  "main": [
+    "tabs-swipable.css",
+    "tabs-swipable.js"
+  ],
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "angular": "1.5.3",
+    "angular-ui-router": "0.2.13",
+    "ionic": "1.3.4"
+  }
+}
