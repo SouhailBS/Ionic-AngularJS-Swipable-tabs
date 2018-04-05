@@ -32,7 +32,7 @@ angular.module('ionic')
               if (nextTarget>=0 && nextTarget<tabsCtrl.tabs.length) {
                 nextTarget!=tabsCtrl.selectedIndex() && (scope.$apply(tabsCtrl.select(nextTarget)));
               }
-              else if (swipeLoop) {
+              else if (swipeLoop) { 
               	if (nextTarget==-1) {
               		nextTarget!=tabsCtrl.selectedIndex() && (scope.$apply(tabsCtrl.select(tabsCtrl.tabs.length - 1)));
               	}
