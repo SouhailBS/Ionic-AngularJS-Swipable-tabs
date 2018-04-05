@@ -40,6 +40,7 @@ Add a `tabs-swipable-loop`  attribute to your tabs with "true" or "false" as val
       ...
     </ion-tabs>
 
+
 ## Limitation
 - Next tab preview is shown only if the next view was cached.
 -  No animation when moving between tabs by clicking on the tab button.
