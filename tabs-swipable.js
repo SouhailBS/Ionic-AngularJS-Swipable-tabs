@@ -5,6 +5,15 @@ angular.module('ionic')
       require: 'ionTabs',
       link: function(scope, elm, attrs, tabsCtrl) {
         var swipeGesture = {};
+        var swipeLoop = false;
+      	if (attrs.tabsSwipableLoop!=undefined) {
+      		if (["true", "false"].indexOf(attrs.tabsSwipableLoop) == -1) {
+      			console.error("tabsSwipable: tabsSwipableLoop value should be true or false, '" + attrs.tabsSwipableLoop + "' is given.");
+      		}
+      		else {
+      			swipeLoop = (attrs.tabsSwipableLoop == "true");
+      		}
+      	}
 
         var onSwipeEnd = function(event) {
           document.contains(document.getElementById('ionTabsAnimatedStyle')) && document.getElementById('ionTabsAnimatedStyle').remove();
@@ -22,6 +31,14 @@ angular.module('ionic')
               event.gesture.direction == "left" && (nextTarget++);
               if (nextTarget>=0 && nextTarget<tabsCtrl.tabs.length) {
                 nextTarget!=tabsCtrl.selectedIndex() && (scope.$apply(tabsCtrl.select(nextTarget)));
+              }
+              else if (swipeLoop) {
+              	if (nextTarget==-1) {
+              		nextTarget!=tabsCtrl.selectedIndex() && (scope.$apply(tabsCtrl.select(tabsCtrl.tabs.length - 1)));
+              	}
+              	else if (nextTarget==tabsCtrl.tabs.length) {
+              		nextTarget!=tabsCtrl.selectedIndex() && (scope.$apply(tabsCtrl.select(0)));
+              	}
               }
             }
         };
@@ -45,8 +62,16 @@ angular.module('ionic')
           if (nextTarget>=0 && nextTarget<tabsCtrl.tabs.length) {
             nextIonNavView = angular.element(document.querySelector("ion-nav-view[name='" + tabsCtrl.tabs[nextTarget].navViewName+"']"));
           }
+          else if (swipeLoop) {
+          	if (nextTarget==-1) {
+          		nextIonNavView = angular.element(document.querySelector("ion-nav-view[name='" + tabsCtrl.tabs[tabsCtrl.tabs.length - 1].navViewName+"']"));
+          	}
+          	else if (nextTarget==tabsCtrl.tabs.length) {
+          		nextIonNavView = angular.element(document.querySelector("ion-nav-view[name='" + tabsCtrl.tabs[0].navViewName+"']"));
+          	}
+          }
           
-          if ((event.gesture.direction == "right" && nextTarget >= 0) || (event.gesture.direction == "left" && nextTarget < tabsCtrl.tabs.length)) {
+          if (swipeLoop || (event.gesture.direction == "right" && nextTarget >= 0) || (event.gesture.direction == "left" && nextTarget < tabsCtrl.tabs.length)) {
             var style = {};
             style["left"] = (event.gesture.deltaX) + "px";
             ionTabView.css(style);
@@ -56,7 +81,7 @@ angular.module('ionic')
             
             nextIonNavView.attr("nav-view", "active");
             nextIonNavView.css(style);
-            (!document.contains(styleTag)) && document.getElementsByTagName('head')[0].append(styleTag);
+            document.getElementsByTagName('head')[0].append(styleTag);
           }
           
         };
@@ -71,9 +96,3 @@ angular.module('ionic')
       }
     };
   }]);
-if (typeof Element.prototype.append != 'function') {
-  // see below for better implementation!
-  Element.prototype.append = function (element){
-    this.innerHTML += element.outerHTML;
-  };
-}
