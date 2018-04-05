@@ -36,9 +36,9 @@ Add a `tabs-swipable`  directive to your tabs:
 - **Swipe loop**
 Add a `tabs-swipable-loop`  attribute to your tabs with "true" or "false" as value (dafault is false):
 
-    <ion-tabs class="tabs-icon-top tabs-color-active-positive" tabs-swipable-loop="true|false">
+    `<ion-tabs class="tabs-icon-top tabs-color-active-positive" tabs-swipable-loop="true|false">
       ...
-    </ion-tabs>
+    </ion-tabs>`
 
 
 ## Limitation
